@@ -5,9 +5,20 @@ fn main() {
         let mut input = String::new();
         println!("Enter what you want to do:");
         println!("new/edit/delete");
-        let option = std::io::stdin().read_line(&mut input).unwrap().to_string();
+        let option: String = std::io::stdin().read_line(&mut input).unwrap().to_string();
+        enum Options {
+            New,
+            Edit,
+            Delete,
+        }
+        let option = match option.trim() {
+            "new" => Options::New,
+            "edit" => Options::Edit,
+            "delete" => Options::Delete,
+            _ => Options::New,
+        };
         match option {
-            "new" => {
+            Options::New => {
                 let mut title = String::new();
                 println!("Enter title:");
                 let _ = std::io::stdin().read_line(&mut title).unwrap();
